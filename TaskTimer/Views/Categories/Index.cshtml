@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TaskTimer.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("Details","Categories",routeValues: new { @id = item.Id})">@item.Name Details</a></li>
+        <li><a href="@Url.Action("Delete","Categories",routeValues: new { @id = item.Id})" onclick="return confirm('Are sure wants to delete?');">@item.Name Delete</a></li>
+    }
+</ul>
