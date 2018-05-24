@@ -34,5 +34,27 @@ namespace TaskTimer.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult New()
+        {
+            return View("CategoryForm", new Category());
+        }
+
+        public ActionResult Save(Category category)
+        {
+            if (category.Id == 0) _categoriesRepository.Create(category);
+            
+            else if (_categoriesRepository.Edit(category) == false) return HttpNotFound();
+
+            return RedirectToAction("Index", "Categories");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            var category = _categoriesRepository.GetById(id);
+            if (_categoriesRepository.Edit(category) == false) return HttpNotFound();
+
+            return View("CategoryForm", category);
+        }
     }
 }

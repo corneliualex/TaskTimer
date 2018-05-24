@@ -14,6 +14,7 @@ namespace TaskTimer.Services.Repository
         public Category GetById(int? id)
         {
             if (id == null) return null;
+
             return _context.Categories.SingleOrDefault(c => c.Id == id);
         }
 
@@ -31,9 +32,24 @@ namespace TaskTimer.Services.Repository
             return true;
         }
 
-        public void Update(Category t)
+        public bool Edit(Category category)
         {
-            throw new NotImplementedException();
+            if (category == null) return false;
+
+            var categoryInDb = GetById(category.Id);
+            if (categoryInDb == null) return false;
+
+            categoryInDb.Id = category.Id;
+            categoryInDb.Name = category.Name;
+
+            _context.SaveChanges();
+            return true;
+        }
+
+        public void Create(Category category)
+        {
+            _context.Categories.Add(category);
+            _context.SaveChanges();
         }
     }
 }

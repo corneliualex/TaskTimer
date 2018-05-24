@@ -10,7 +10,17 @@ namespace TaskTimer.Services.Repository
 {
     public class ActivityRepository : IEntityRepository<Activity>
     {
+        public void Create(Activity t)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Delete(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Activity Duplicate(Activity category)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +35,7 @@ namespace TaskTimer.Services.Repository
             throw new NotImplementedException();
         }
 
-        public void Update(Activity t)
+        public bool Edit(Activity t)
         {
             throw new NotImplementedException();
         }
