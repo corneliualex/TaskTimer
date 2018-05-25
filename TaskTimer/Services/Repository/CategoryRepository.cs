@@ -10,27 +10,41 @@ namespace TaskTimer.Services.Repository
     public class CategoryRepository : IEntityRepository<Category>
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
+        private DbSet<Category> _categoryDbSet;
 
-        public Category GetById(int? id)
+        public CategoryRepository()
         {
-            if (id == null) return null;
-
-            return _context.Categories.SingleOrDefault(c => c.Id == id);
+            _categoryDbSet = _context.Categories;
         }
 
-        public IEnumerable<Category> GetAll()
+        public void Create(Category category)
         {
-            return _context.Categories.ToList();
+            _categoryDbSet.Add(category);
+            _context.SaveChanges();
         }
 
         public bool Delete(int? id)
         {
             if (GetById(id) == null) return false;
 
-            _context.Categories.Remove(GetById(id));
+            _categoryDbSet.Remove(GetById(id));
             _context.SaveChanges();
             return true;
         }
+
+
+        public Category GetById(int? id)
+        {
+            if (id == null) return null;
+
+            return _categoryDbSet.SingleOrDefault(c => c.Id == id);
+        }
+
+        public IEnumerable<Category> GetAll()
+        {
+            return _categoryDbSet.ToList();
+        }
+
 
         public bool Edit(Category category)
         {
@@ -46,10 +60,6 @@ namespace TaskTimer.Services.Repository
             return true;
         }
 
-        public void Create(Category category)
-        {
-            _context.Categories.Add(category);
-            _context.SaveChanges();
-        }
+        
     }
 }

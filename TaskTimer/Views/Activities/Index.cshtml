@@ -1,7 +1,16 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model IEnumerable<TaskTimer.Models.Activity>
+    @{
+        ViewBag.Title = "Index";
+    }
 
-<h2>Index</h2>
+    <h2>Index</h2>
 
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.Description</li>
+        <li>@item.Category.Name</li>
+        <li>@item.ApplicationUser.UserName</li>
+       <text> ________________________________________</text>
+    }
+</ul>
