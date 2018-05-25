@@ -1,0 +1,12 @@
+﻿@model TaskTimer.Models.Activity
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<ul>
+    <li>@Model.Description</li>
+    <li>@Model.Category.Name</li>
+    <li>@Model.ApplicationUser.UserName</li>
+</ul>

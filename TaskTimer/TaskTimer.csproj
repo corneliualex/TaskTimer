@@ -187,6 +187,18 @@
     <Compile Include="Migrations\201805221437080_Seed_Categories.Designer.cs">
       <DependentUpon>201805221437080_Seed_Categories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805250836523_Update_RelationShips.cs" />
+    <Compile Include="Migrations\201805250836523_Update_RelationShips.Designer.cs">
+      <DependentUpon>201805250836523_Update_RelationShips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805250840576_CategoryModel.cs" />
+    <Compile Include="Migrations\201805250840576_CategoryModel.Designer.cs">
+      <DependentUpon>201805250840576_CategoryModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805251011555_ActivityModel.cs" />
+    <Compile Include="Migrations\201805251011555_ActivityModel.Designer.cs">
+      <DependentUpon>201805251011555_ActivityModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -198,6 +210,7 @@
     <Compile Include="Services\Repository\CategoryRepository.cs" />
     <Compile Include="Services\Repository\IEntityRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ActivityCategoriesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -258,9 +271,12 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Categories\CategoryForm.cshtml" />
+    <Content Include="Views\Activities\ActivityForm.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Services\Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -279,6 +295,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805221437080_Seed_Categories.resx">
       <DependentUpon>201805221437080_Seed_Categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805250836523_Update_RelationShips.resx">
+      <DependentUpon>201805250836523_Update_RelationShips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805250840576_CategoryModel.resx">
+      <DependentUpon>201805250840576_CategoryModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805251011555_ActivityModel.resx">
+      <DependentUpon>201805251011555_ActivityModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

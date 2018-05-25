@@ -3,41 +3,71 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TaskTimer.Models;
-using TaskTimer.Services.Repository;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 namespace TaskTimer.Services.Repository
 {
     public class ActivityRepository : IEntityRepository<Activity>
     {
-        public void Create(Activity t)
+        private ApplicationDbContext _context = new ApplicationDbContext();
+        private DbSet<Activity> _activityDbSet;
+        //construcotor : init _activityDbSet with _context.Activities
+        public ActivityRepository()
         {
-            throw new NotImplementedException();
+            _activityDbSet = _context.Activities;
         }
 
+        //create activity
+        public void Create(Activity activity)
+        {
+            activity.ApplicationUserId = HttpContext.Current.User.Identity.GetUserId();
+            _activityDbSet.Add(activity);
+            _context.SaveChanges();
+        }
+
+        //delete activity
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            if (GetById(id) == null) return false;
+
+            _activityDbSet.Remove(GetById(id));
+            _context.SaveChanges();
+            return true;
+
         }
 
-        public Activity Duplicate(Activity category)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Activity> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
+        //get activity by id
         public Activity GetById(int? id)
         {
-            throw new NotImplementedException();
+            if (id == null) return null;
+
+            return _activityDbSet.Include(u => u.ApplicationUser).Include(c => c.Category).SingleOrDefault(a => a.Id == id);
         }
 
-        public bool Edit(Activity t)
+        //get all activites
+        public IEnumerable<Activity> GetAll()
         {
-            throw new NotImplementedException();
+            return _activityDbSet.Include(u => u.ApplicationUser).Include(c => c.Category).ToList();
+        }      
+
+        //edit activity
+        public bool Edit(Activity activity)
+        {
+            if (activity == null) return false;
+
+            var activityInDb = GetById(activity.Id);
+            if (activityInDb == null) return false;
+
+            activityInDb.Id = activity.Id;
+            activityInDb.Description = activity.Description;
+            activityInDb.Date = activity.Date;
+            activityInDb.TimeSpent = activity.TimeSpent;
+            activityInDb.ApplicationUserId = activity.ApplicationUserId;
+            activityInDb.CategoryId = activity.CategoryId;
+
+            _context.SaveChanges();
+            return true;           
         }
     }
 }
