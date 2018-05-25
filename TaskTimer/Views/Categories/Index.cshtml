@@ -1,13 +1,42 @@
 ﻿@model IEnumerable<TaskTimer.Models.Category>
 @{
     ViewBag.Title = "Index";
+    var index = 0;
 }
 
-<h2>Index</h2>
-<ul>
-    @foreach (var item in Model)
-    {
-        <li><a href="@Url.Action("Details","Categories",routeValues: new { @id = item.Id})">@item.Name Details</a></li>
-        <li><a href="@Url.Action("Delete","Categories",routeValues: new { @id = item.Id})" onclick="return confirm('Are sure wants to delete?');">@item.Name Delete</a></li>
-    }
-</ul>
+<div class="row">
+    <div class="col-lg-offset-2"><h3>Categories</h3></div>
+</div>
+
+<br />
+<div class="row" id="content">
+    <div class="col-lg-12"><a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("New")">new category</a></div>
+    <div class="col-lg-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col" class="table-light">Add Task using this category</th>
+                    <th scope="col" class="table-light">Details</th>
+                    <th scope="col" class="table-light">Update</th>
+                    <th scope="col" class="table-dark">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(++index)</td>
+                        <td>@item.Name</td>
+                        <td>to be implemented</td>
+                        <td><a href="@Url.Action("Details", "Categories", routeValues: new { id = item.Id })">Details</a></td>
+                        <td><a href="@Url.Action("Edit", "Categories", routeValues: new { id = item.Id })">Update</a></td>
+                        <td><a href="@Url.Action("Delete", "Categories", routeValues: new { id = item.Id })" onclick="return confirm('Do you want to delete this ?');">Delete</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
